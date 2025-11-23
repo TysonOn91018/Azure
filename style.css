@@ -1,0 +1,396 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-orange: #ff4d00;
+    --shell-bg: #f4f4f4;
+    --card-bg: #ffffff;
+    --text-primary: #111111;
+    --text-muted: #6b6b76;
+    --border: #e5e5ec;
+    --accent: #111111;
+    --accent-muted: #d9d9e3;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bg-orange);
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    color: var(--text-primary);
+}
+
+.app-shell {
+    width: min(1100px, 100%);
+    background: var(--shell-bg);
+    border-radius: 36px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #111;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero-card {
+    background: var(--card-bg);
+    border-radius: 28px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero-label p {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+}
+
+.hero-date span {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.hero-date small {
+    display: block;
+    color: var(--text-muted);
+}
+
+.hero-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-time {
+    text-align: center;
+}
+
+.time-display {
+    font-size: clamp(3rem, 12vw, 7rem);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.location-info h1 {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 600;
+}
+
+.location-sub {
+    color: var(--text-muted);
+}
+
+.city-select-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.city-select {
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 0.65rem 0.85rem;
+    background: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    width: 260px;
+    max-width: 100%;
+}
+
+.live-clock {
+    text-align: right;
+}
+
+.live-date {
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.live-time {
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.city-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.city-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.city-card p {
+    font-weight: 600;
+}
+
+.city-card small {
+    color: var(--text-muted);
+}
+
+.city-time {
+    font-size: 1.9rem;
+    font-weight: 600;
+}
+
+.city-card.primary {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.city-card.primary small {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.timer-panel {
+    background: var(--card-bg);
+    border-radius: 28px;
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.95rem;
+    border-radius: 16px;
+    border: 1px solid #dcdde5;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+.btn-start { background: #111; color: #fff; border-color: #111; }
+.btn-stop { background: #f3f3f3; }
+.btn-reset { background: #f3f3f3; }
+.btn-lap { background: #f3f3f3; }
+
+.lap-section,
+.settings-section {
+    background: #f9f9fb;
+    border-radius: 24px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.lap-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.lap-list {
+    max-height: 220px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.lap-item {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 0.85rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    animation: slideIn 0.3s ease-out;
+}
+
+.no-laps {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.settings-panel {
+    margin-top: 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    background: #fff;
+}
+
+.settings-panel.hidden {
+    display: none;
+}
+
+.setting-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.setting-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.setting-select,
+.setting-input {
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 0.65rem 0.85rem;
+    background: #f9f9fb;
+    font-family: inherit;
+}
+
+.particles-canvas {
+    display: none;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+    .app-shell {
+        padding: 1.75rem;
+    }
+
+    .hero-upper,
+    .hero-lower {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .live-clock {
+        text-align: left;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .app-shell {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .hero-card,
+    .timer-panel {
+        padding: 1.25rem;
+    }
+
+    .controls {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+/* Theme backgrounds for auto/cycle feature */
+body.day {
+    --bg-orange: #f0f2f5;
+    background: linear-gradient(135deg, #fefefe, #f2f4f7);
+}
+
+body.night {
+    --bg-orange: #10121a;
+    background: linear-gradient(135deg, #0f0f1a, #1b1f30);
+}
+
+body.ocean {
+    --bg-orange: #e0f7fa;
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.sunset {
+    --bg-orange: #ff6f61;
+    background: linear-gradient(135deg, #ff6f61, #ff9966);
+}
+
+body.forest {
+    --bg-orange: #e8f5e9;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+}
+
+body.purple {
+    --bg-orange: #f3e8ff;
+    background: linear-gradient(135deg, #f3e8ff, #d7b7ff);
+}
+
+body.pink {
+    --bg-orange: #ffeef5;
+    background: linear-gradient(135deg, #ffeef5, #ffd4e1);
+}
+
+body.minimal {
+    --bg-orange: #f8f8fb;
+    background: linear-gradient(135deg, #fdfdfd, #f4f4f8);
+}
+

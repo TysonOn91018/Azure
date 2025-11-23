@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイマーアプリケーション</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="brand">
+                <span class="brand-mark"></span>
+                <strong>TimeSpot</strong>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero-card">
+                <div class="hero-upper">
+                    <div class="hero-label">
+                        <p>Current</p>
+                        <div class="hero-date">
+                            <span id="heroDate">Sun · 07:12 – 17:17</span>
+                            <small id="heroFullDate">Monday, Mar 24 2025</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-time">
+                    <time class="time-display">
+                        <span id="hours">00</span>
+                        <span>:</span>
+                        <span id="minutes">00</span>
+                        <span>:</span>
+                        <span id="seconds">00</span>
+                    </time>
+                </div>
+
+                <div class="hero-lower">
+                    <div class="location-info">
+                        <p class="location-label">Location</p>
+                        <h1 id="locationName">Tokyo, Japan</h1>
+                        <p id="locationSub" class="location-sub">UTC+9 · Day</p>
+                        <label class="city-select-label">
+                            <span>Show city:</span>
+                            <select id="citySelect" class="city-select" aria-label="Select primary city">
+                                <option value="tokyo">Tokyo, Japan (UTC+9)</option>
+                                <option value="london">London, United Kingdom (UTC+0)</option>
+                                <option value="newyork">New York, United States (UTC-5)</option>
+                                <option value="losangeles">Los Angeles, United States (UTC-8)</option>
+                                <option value="paris">Paris, France (UTC+1)</option>
+                                <option value="sydney">Sydney, Australia (UTC+10)</option>
+                                <option value="hongkong">Hong Kong, China (UTC+8)</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="live-clock">
+                        <time class="live-date">
+                            <span id="year">2025</span>
+                            <span>/</span>
+                            <span id="month">11</span>
+                            <span>/</span>
+                            <span id="day">12</span>
+                        </time>
+                        <time class="live-time">
+                            <span id="liveHour">00</span>
+                            <span>:</span>
+                            <span id="liveMinute">00</span>
+                            <span>:</span>
+                            <span id="liveSecond">00</span>
+                        </time>
+                    </div>
+                </div>
+            </section>
+
+            <section class="city-grid" aria-label="World cities">
+                <article class="city-card">
+                    <p>Los Angeles</p>
+                    <small>UTC-8 · Night</small>
+                    <span class="city-time">00:15</span>
+                </article>
+                <article class="city-card">
+                    <p>New York</p>
+                    <small>UTC-5 · Night</small>
+                    <span class="city-time">03:15</span>
+                </article>
+                <article class="city-card primary">
+                    <p id="primaryCityLabel">Tokyo</p>
+                    <small id="primaryCityMeta">UTC+9 · Day</small>
+                    <span class="city-time" id="primaryCityTime">00:15</span>
+                </article>
+                <article class="city-card">
+                    <p>Paris</p>
+                    <small>UTC+0 · Day</small>
+                    <span class="city-time">09:15</span>
+                </article>
+                <article class="city-card">
+                    <p>Hong Kong</p>
+                    <small>UTC+8 · Day</small>
+                    <span class="city-time">07:15</span>
+                </article>
+            </section>
+
+            <section class="timer-panel">
+                <div class="controls">
+                    <button id="startBtn" class="btn btn-start">開始</button>
+                    <button id="stopBtn" class="btn btn-stop" disabled>停止</button>
+                    <button id="resetBtn" class="btn btn-reset">リセット</button>
+                    <button id="lapBtn" class="btn btn-lap" disabled>ラップ</button>
+                </div>
+
+                <div class="lap-section">
+                    <h2 class="lap-title">ラップタイム</h2>
+                    <div id="lapList" class="lap-list"></div>
+                    <p id="noLaps" class="no-laps">ラップタイムはまだ記録されていません</p>
+                </div>
+
+                <div class="settings-section">
+                    <button id="settingsBtn" class="btn btn-settings">⚙️ 設定</button>
+                    <div id="settingsPanel" class="settings-panel hidden">
+                        <h3 class="settings-title">設定</h3>
+                        
+                        <div class="setting-group">
+                            <label class="setting-label">背景テーマ:</label>
+                            <select id="themeSelect" class="setting-select">
+                                <option value="auto">自動（時間ベース）</option>
+                                <option value="cycle">自動切り替え（30秒ごと）</option>
+                                <option value="day">昼間</option>
+                                <option value="night">夜間</option>
+                                <option value="ocean">オーシャン</option>
+                                <option value="sunset">サンセット</option>
+                                <option value="forest">フォレスト</option>
+                                <option value="purple">パープル</option>
+                                <option value="pink">ピンク</option>
+                                <option value="minimal">ミニマル</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-group">
+                            <label class="setting-label">
+                                <input type="checkbox" id="soundToggle" checked>
+                                <span>音声アラート</span>
+                            </label>
+                        </div>
+
+                        <div class="setting-group">
+                            <label class="setting-label">アラート時間（秒）:</label>
+                            <input type="number" id="alertTime" class="setting-input" min="1" value="60">
+                        </div>
+
+                        <div class="setting-group">
+                            <label class="setting-label">
+                                <input type="checkbox" id="pulseEffect">
+                                <span>パルスエフェクト</span>
+                            </label>
+                        </div>
+
+                        <div class="setting-group">
+                            <label class="setting-label">
+                                <input type="checkbox" id="particlesEffect">
+                                <span>パーティクルエフェクト</span>
+                            </label>
+                        </div>
+
+                        <button id="clearLapsBtn" class="btn btn-clear-laps">ラップタイムをクリア</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <canvas id="particlesCanvas" class="particles-canvas"></canvas>
+</body>
+</html>
+
